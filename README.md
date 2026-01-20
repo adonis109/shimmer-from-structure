@@ -4,7 +4,7 @@ A React shimmer/skeleton library that **automatically adapts to your component's
 
 ![Shimmer From Structure Demo](./example/preview.gif)
 
-## 🎯 Why This Library?
+## Why This Library?
 
 Traditional shimmer libraries require you to:
 - Manually create skeleton components that mirror your real components
@@ -20,7 +20,7 @@ Traditional shimmer libraries require you to:
 - ✅ Preserves container backgrounds during loading
 - ✅ Auto-detects border-radius from your CSS
 
-## 🚀 Installation
+## Installation
 
 ```bash
 npm install shimmer-from-structure
@@ -30,7 +30,7 @@ yarn add shimmer-from-structure
 pnpm add shimmer-from-structure
 ```
 
-## 📖 Basic Usage
+# 📖 Basic Usage
 
 ### Static Content
 
@@ -140,7 +140,7 @@ The `templateProps` object is spread onto the first child component when loading
 - **Fallback radius**: Text elements (which have `border-radius: 0`) use `fallbackBorderRadius` to avoid sharp rectangles
 - **Dark-mode friendly**: Default colors use semi-transparent whites that work on any background
 
-## 🎭 Examples
+## Examples
 
 ### Dashboard with Multiple Sections
 
@@ -190,7 +190,7 @@ function Dashboard() {
 </Shimmer>
 ```
 
-## 🎯 Best Practices
+## Best Practices
 
 ### 1. Use `templateProps` for Dynamic Data
 When your component receives data via props, always provide `templateProps` with mock data that matches the expected structure.
