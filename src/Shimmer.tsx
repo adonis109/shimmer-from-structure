@@ -6,7 +6,7 @@ import { ShimmerProps, ElementInfo } from './types';
  */
 function isLeafElement(element: Element): boolean {
   const tag = element.tagName.toLowerCase();
-  
+
   // Always include these elements as they're always content
   const alwaysInclude = ['img', 'svg', 'video', 'canvas', 'iframe', 'input', 'textarea', 'button'];
   if (alwaysInclude.includes(tag)) {
@@ -29,7 +29,7 @@ function isLeafElement(element: Element): boolean {
 function extractElementInfo(element: Element, parentRect: DOMRect): ElementInfo[] {
   const elements: ElementInfo[] = [];
   const rect = element.getBoundingClientRect();
-  
+
   // Skip elements with no dimensions
   if (rect.width === 0 || rect.height === 0) {
     return elements;
@@ -61,14 +61,44 @@ function extractElementInfo(element: Element, parentRect: DOMRect): ElementInfo[
 export const Shimmer: React.FC<ShimmerProps> = ({
   children,
   loading = true,
-  shimmerColor = '#e0e0e0',
-  backgroundColor = '#f0f0f0',
+  shimmerColor = 'rgba(255, 255, 255, 0.15)',
+  backgroundColor = 'rgba(255, 255, 255, 0.08)',
   duration = 1.5,
   borderRadius = 4,
+  templateProps,
 }) => {
   const [elements, setElements] = useState<ElementInfo[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
+
+  // Prepare children with injected template props when loading
+  const childrenToRender = React.useMemo(() => {
+    // Only inject template props if loading and templateProps is provided
+    if (!loading || !templateProps) {
+      return children;
+    }
+
+    // Get the first child
+    const childArray = React.Children.toArray(children);
+    if (childArray.length === 0) {
+      return children;
+    }
+
+    const firstChild = childArray[0];
+
+    // Check if it's a valid React element that can receive props
+    if (!React.isValidElement(firstChild)) {
+      return children;
+    }
+
+    // Clone the first child with the template props spread onto it
+    const clonedChild = React.cloneElement(firstChild, {
+      ...templateProps,
+    });
+
+    // Return cloned first child + rest of children unchanged
+    return [clonedChild, ...childArray.slice(1)];
+  }, [children, loading, templateProps]);
 
   // Measure the structure using useLayoutEffect (synchronous, before paint)
   useLayoutEffect(() => {
@@ -76,7 +106,7 @@ export const Shimmer: React.FC<ShimmerProps> = ({
 
     const container = measureRef.current;
     const containerRect = container.getBoundingClientRect();
-    
+
     // Extract all element dimensions
     const extractedElements: ElementInfo[] = [];
     Array.from(container.children).forEach((child) => {
@@ -84,7 +114,7 @@ export const Shimmer: React.FC<ShimmerProps> = ({
     });
 
     setElements(extractedElements);
-  }, [loading, children]);
+  }, [loading, childrenToRender]);
 
   if (!loading) {
     return <>{children}</>;
@@ -101,7 +131,7 @@ export const Shimmer: React.FC<ShimmerProps> = ({
         }}
         aria-hidden="true"
       >
-        {children}
+        {childrenToRender}
       </div>
 
       {/* Shimmer overlay based on measured dimensions */}
