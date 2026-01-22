@@ -190,6 +190,58 @@ function Dashboard() {
 </Shimmer>
 ```
 
+## 🔄 Using with React Suspense
+
+Shimmer works seamlessly as a Suspense fallback. When used this way, `loading` is always `true` because React automatically unmounts the fallback and replaces it with the resolved component.
+
+### Basic Suspense Pattern
+
+```tsx
+import { Suspense, lazy } from 'react';
+import { Shimmer } from 'shimmer-from-structure';
+
+const UserProfile = lazy(() => import('./UserProfile'));
+
+function App() {
+  return (
+    <Suspense
+      fallback={
+        <Shimmer loading={true} templateProps={{ user: userTemplate }}>
+          <UserProfile />
+        </Shimmer>
+      }
+    >
+      <UserProfile userId="123" />
+    </Suspense>
+  );
+}
+```
+
+### Why `loading={true}` is Always Set
+
+When using Shimmer as a Suspense fallback:
+1. **Suspend**: React renders the fallback → Shimmer shows with `loading={true}`
+2. **Resolve**: React **replaces** the entire fallback with the real component
+3. The Shimmer is **unmounted**, not updated — so you never need to toggle `loading`
+
+### Performance Tips for Suspense
+
+**Memoize the fallback** to prevent re-renders:
+```tsx
+const ShimmerFallback = React.memo(() => (
+  <Shimmer loading={true} templateProps={{ user: userTemplate }}>
+    <UserProfile />
+  </Shimmer>
+));
+
+// Usage
+<Suspense fallback={<ShimmerFallback />}>
+  <UserProfile userId="123" />
+</Suspense>
+```
+
+**Keep templates lightweight** — the DOM is measured synchronously via `useLayoutEffect`, so avoid complex logic in your template.
+
 ## Best Practices
 
 ### 1. Use `templateProps` for Dynamic Data

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Shimmer } from '../src';
 import {
@@ -302,6 +302,68 @@ const TeamMembers = ({ members }: { members: TeamMember[] }) => (
 );
 
 // =============================================================================
+// SUSPENSE EXAMPLE - Lazy-loaded Notifications Component
+// =============================================================================
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  time: string;
+  type: 'info' | 'success' | 'warning';
+}
+
+// Template for shimmer skeleton
+const notificationsTemplate: Notification[] = [
+  { id: '1', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
+  { id: '2', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
+  { id: '3', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
+];
+
+// The actual Notifications component
+const NotificationsPanel = ({ notifications }: { notifications: Notification[] }) => (
+  <div className="notifications-panel">
+    <h3 className="section-title">🔔 Notifications (Suspense Demo)</h3>
+    <div className="notifications-list">
+      {notifications.map((notif) => (
+        <div key={notif.id} className={`notification-item ${notif.type}`}>
+          <div className="notification-header">
+            <span className="notification-title">{notif.title}</span>
+            <span className="notification-time">{notif.time}</span>
+          </div>
+          <p className="notification-message">{notif.message}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// Simulate a lazy-loaded component (as if it was code-split)
+// In real usage, this would be: const LazyNotifications = lazy(() => import('./Notifications'));
+const LazyNotificationsPanel = lazy(() =>
+  new Promise<{ default: typeof NotificationsPanel }>((resolve) => {
+    // Simulate network delay for code-splitting
+    setTimeout(() => {
+      resolve({ default: NotificationsPanel });
+    }, 3000);
+  })
+);
+
+// Memoized Shimmer fallback for better performance
+const NotificationsShimmerFallback = React.memo(() => (
+  <Shimmer loading={true} templateProps={{ notifications: notificationsTemplate }}>
+    <NotificationsPanel notifications={notificationsTemplate} />
+  </Shimmer>
+));
+
+// Real notifications data (loaded after component mounts)
+const realNotifications: Notification[] = [
+  { id: '1', title: 'New Comment', message: 'Sarah commented on your pull request #42', time: '2m', type: 'info' },
+  { id: '2', title: 'Build Passed', message: 'CI pipeline completed successfully', time: '15m', type: 'success' },
+  { id: '3', title: 'Security Alert', message: 'New login detected from Safari on macOS', time: '1h', type: 'warning' },
+];
+
+// =============================================================================
 // MAIN APP
 // =============================================================================
 
@@ -436,6 +498,14 @@ function App() {
         >
           <StatsGrid stats={stats || statsTemplate} />
         </Shimmer>
+      </section>
+
+      {/* Suspense Example - Lazy-loaded Notifications */}
+      <section className="dashboard-section suspense-section">
+        <div className="suspense-label">⚡ React Suspense Example</div>
+        <Suspense fallback={<NotificationsShimmerFallback />}>
+          <LazyNotificationsPanel notifications={realNotifications} />
+        </Suspense>
       </section>
 
       {/* Revenue Chart Section */}

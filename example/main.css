@@ -519,6 +519,88 @@ body {
 }
 
 /* =============================================================================
+   NOTIFICATIONS PANEL (Suspense Example)
+   ============================================================================= */
+
+.suspense-section {
+  position: relative;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  background: rgba(234, 179, 8, 0.03);
+}
+
+.suspense-label {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #eab308;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.notifications-panel {
+  width: 100%;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-item {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.notification-item.info {
+  border-left-color: #3b82f6;
+}
+
+.notification-item.success {
+  border-left-color: #10b981;
+}
+
+.notification-item.warning {
+  border-left-color: #f59e0b;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.notification-title {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.notification-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.notification-message {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* =============================================================================
    RESPONSIVE
    ============================================================================= */
 
