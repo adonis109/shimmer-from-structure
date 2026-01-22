@@ -17,7 +17,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'ShimmerFromStructure',
       formats: ['es', 'umd'],
-      fileName: (format) => `index.${format === 'es' ? 'esm' : 'js'}`,
+      fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
