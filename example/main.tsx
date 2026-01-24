@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Shimmer } from '../src';
+import { Shimmer, ShimmerProvider } from '../src';
 import {
   AreaChart,
   Area,
@@ -65,9 +65,9 @@ interface ChartDataPoint {
 // =============================================================================
 
 const userTemplate: User = {
-  name: 'Loading User...',
-  email: 'loading@example.com',
-  role: 'Loading...',
+  name: 'Sarah Johnson',
+  email: 'sarah.johnson@company.com',
+  role: 'software Engineer',
   avatar: 'https://via.placeholder.com/64',
   status: 'offline',
 };
@@ -94,7 +94,7 @@ const activityTemplate: ActivityItem[] = [
 
 const teamTemplate: TeamMember[] = [
   { id: '1', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
-  { id: '2', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
+  { id: '2', name: 'Loading...', role: 'Lead Developer', avatar: 'https://via.placeholder.com/40' },
   { id: '3', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
   { id: '4', name: 'Loading...', role: 'Backend Developer', avatar: 'https://via.placeholder.com/40' },
 ];
@@ -384,6 +384,10 @@ function App() {
   const [chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
   const [loadingChart, setLoadingChart] = useState(true);
 
+  // Context Example State
+  const [loadingContextExample, setLoadingContextExample] = useState(true);
+  const [contextData, setContextData] = useState<TeamMember[] | null>(null);
+
   // Simulate independent API calls with different response times
   useEffect(() => {
     // User loads first (fast)
@@ -421,6 +425,12 @@ function App() {
       setTransactions(realTransactions);
       setLoadingTransactions(false);
     }, 2500);
+
+    // Context Example loads extra slow (to show off the theme)
+    setTimeout(() => {
+      setContextData(realTeam.slice(0, 2)); // Use subset of team data
+      setLoadingContextExample(false);
+    }, 4000);
   }, []);
 
   // Reset all data
@@ -431,12 +441,14 @@ function App() {
     setLoadingTransactions(true);
     setLoadingActivity(true);
     setLoadingTeam(true);
+    setLoadingContextExample(true); // Reset context example
     setUser(null);
     setStats(null);
     setChartData(null);
     setTransactions(null);
     setActivity(null);
     setTeam(null);
+    setContextData(null); // Reset context data
 
     // Re-trigger the effect
     setTimeout(() => {
@@ -468,6 +480,11 @@ function App() {
       setTransactions(realTransactions);
       setLoadingTransactions(false);
     }, 2500);
+
+    setTimeout(() => {
+      setContextData(realTeam.slice(0, 2));
+      setLoadingContextExample(false);
+    }, 4000);
   };
 
   return (
@@ -553,6 +570,36 @@ function App() {
           </section>
         </div>
       </div>
+
+      {/* Context API Example */}
+      <section className="dashboard-section context-section" style={{ marginTop: '2rem' }}>
+        <h3 className="section-title">🎨 Context API Example (Custom Theme)</h3>
+        <p style={{ marginBottom: '1rem', color: '#888' }}>
+          This section uses <code>ShimmerProvider</code> to apply a global blue theme to all children.
+        </p>
+
+        <ShimmerProvider config={{
+          shimmerColor: 'rgba(56, 189, 248, 0.4)',
+          backgroundColor: 'rgba(56, 189, 248, 0.1)',
+          duration: 3,
+          fallbackBorderRadius: 16
+        }}>
+          <Shimmer
+            loading={loadingContextExample}
+            templateProps={{ members: teamTemplate.slice(0, 2) }}
+          >
+            <div className="members-grid">
+              {(contextData || teamTemplate.slice(0, 2)).map((member) => (
+                <div key={member.id} className="member-card">
+                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#333' }} />
+                  <p className="member-name">{member.name}</p>
+                  <span className="member-role">{member.role}</span>
+                </div>
+              ))}
+            </div>
+          </Shimmer>
+        </ShimmerProvider>
+      </section>
 
       {/* Footer */}
       <footer className="dashboard-footer">

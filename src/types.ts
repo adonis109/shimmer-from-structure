@@ -26,3 +26,6 @@ export interface ShimmerProps {
    */
   templateProps?: Record<string, unknown>;
 }
+
+// Re-export config type from context for external use
+export type { ShimmerConfig } from './ShimmerContext';
