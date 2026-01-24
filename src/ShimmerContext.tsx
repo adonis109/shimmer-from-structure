@@ -1,45 +1,13 @@
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
+import { ShimmerConfig, ShimmerContextValue } from './types';
+import { shimmerDefaults } from './constants';
 
-/**
- * Configuration options for shimmer appearance and behavior.
- * All properties are optional when providing config to ShimmerProvider.
- */
-export interface ShimmerConfig {
-    /** Color of the shimmer wave animation */
-    shimmerColor?: string;
-    /** Background color of shimmer placeholders */
-    backgroundColor?: string;
-    /** Duration of one shimmer animation cycle in seconds */
-    duration?: number;
-    /** Fallback border radius (px) for elements without explicit border-radius */
-    fallbackBorderRadius?: number;
-}
-
-/**
- * Internal context value type with all required properties.
- * Ensures consuming components always receive valid values.
- */
-interface ShimmerContextValue {
-    shimmerColor: string;
-    backgroundColor: string;
-    duration: number;
-    fallbackBorderRadius: number;
-}
-
-/** Default configuration values */
-const defaultConfig: ShimmerContextValue = {
-    shimmerColor: 'rgba(255, 255, 255, 0.15)',
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    duration: 1.5,
-    fallbackBorderRadius: 4,
-};
-
-const ShimmerContext = createContext<ShimmerContextValue>(defaultConfig);
+const ShimmerContext = createContext<ShimmerContextValue>(shimmerDefaults);
 
 export interface ShimmerProviderProps {
-    /** Shimmer configuration to apply to all child Shimmer components */
-    config?: ShimmerConfig;
-    children: ReactNode;
+  /** Shimmer configuration to apply to all child Shimmer components */
+  config?: ShimmerConfig;
+  children: ReactNode;
 }
 
 /**
@@ -53,22 +21,18 @@ export interface ShimmerProviderProps {
  * </ShimmerProvider>
  * ```
  */
-export const ShimmerProvider: React.FC<ShimmerProviderProps> = ({
-    config = {},
-    children,
-}) => {
-    const mergedConfig: ShimmerContextValue = useMemo(() => ({
-        shimmerColor: config.shimmerColor ?? defaultConfig.shimmerColor,
-        backgroundColor: config.backgroundColor ?? defaultConfig.backgroundColor,
-        duration: config.duration ?? defaultConfig.duration,
-        fallbackBorderRadius: config.fallbackBorderRadius ?? defaultConfig.fallbackBorderRadius,
-    }), [config.shimmerColor, config.backgroundColor, config.duration, config.fallbackBorderRadius]);
+export const ShimmerProvider: React.FC<ShimmerProviderProps> = ({ config = {}, children }) => {
+  const mergedConfig: ShimmerContextValue = useMemo(
+    () => ({
+      shimmerColor: config.shimmerColor ?? shimmerDefaults.shimmerColor,
+      backgroundColor: config.backgroundColor ?? shimmerDefaults.backgroundColor,
+      duration: config.duration ?? shimmerDefaults.duration,
+      fallbackBorderRadius: config.fallbackBorderRadius ?? shimmerDefaults.fallbackBorderRadius,
+    }),
+    [config.shimmerColor, config.backgroundColor, config.duration, config.fallbackBorderRadius]
+  );
 
-    return (
-        <ShimmerContext.Provider value={mergedConfig}>
-            {children}
-        </ShimmerContext.Provider>
-    );
+  return <ShimmerContext.Provider value={mergedConfig}>{children}</ShimmerContext.Provider>;
 };
 
 /**
@@ -77,8 +41,9 @@ export const ShimmerProvider: React.FC<ShimmerProviderProps> = ({
  * All returned values are guaranteed to be defined.
  */
 export const useShimmerConfig = (): ShimmerContextValue => {
-    return useContext(ShimmerContext);
+  return useContext(ShimmerContext);
 };
 
-// Export defaults for testing and reference
-export { defaultConfig as shimmerDefaults };
+// Re-export defaults for testing and reference
+// eslint-disable-next-line react-refresh/only-export-components
+export { shimmerDefaults };

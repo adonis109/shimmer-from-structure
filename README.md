@@ -7,11 +7,13 @@ A React shimmer/skeleton library that **automatically adapts to your component's
 ## Why This Library?
 
 Traditional shimmer libraries require you to:
+
 - Manually create skeleton components that mirror your real components
 - Maintain two versions of each component (real + skeleton)
 - Update skeletons every time your layout changes
 
 **Shimmer From Structure** eliminates all of that:
+
 - ✅ Automatically measures your component's structure at runtime
 - ✅ Generates shimmer effects that match actual dimensions
 - ✅ Zero maintenance - works with any layout changes
@@ -80,10 +82,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   return (
-    <Shimmer 
-      loading={loading} 
-      templateProps={{ user: userTemplate }}
-    >
+    <Shimmer loading={loading} templateProps={{ user: userTemplate }}>
       <UserCard user={user || userTemplate} />
     </Shimmer>
   );
@@ -96,15 +95,15 @@ The `templateProps` object is spread onto the first child component when loading
 
 ### `<Shimmer>` Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `loading` | `boolean` | `true` | Whether to show shimmer effect or actual content |
-| `children` | `React.ReactNode` | required | The content to render/measure |
-| `shimmerColor` | `string` | `'rgba(255,255,255,0.15)'` | Color of the shimmer wave |
-| `backgroundColor` | `string` | `'rgba(255,255,255,0.08)'` | Background color of shimmer blocks |
-| `duration` | `number` | `1.5` | Animation duration in seconds |
-| `fallbackBorderRadius` | `number` | `4` | Border radius (px) for elements with no CSS border-radius |
-| `templateProps` | `Record<string, unknown>` | - | Props to inject into first child for skeleton rendering |
+| Prop                   | Type                      | Default                    | Description                                               |
+| ---------------------- | ------------------------- | -------------------------- | --------------------------------------------------------- |
+| `loading`              | `boolean`                 | `true`                     | Whether to show shimmer effect or actual content          |
+| `children`             | `React.ReactNode`         | required                   | The content to render/measure                             |
+| `shimmerColor`         | `string`                  | `'rgba(255,255,255,0.15)'` | Color of the shimmer wave                                 |
+| `backgroundColor`      | `string`                  | `'rgba(255,255,255,0.08)'` | Background color of shimmer blocks                        |
+| `duration`             | `number`                  | `1.5`                      | Animation duration in seconds                             |
+| `fallbackBorderRadius` | `number`                  | `4`                        | Border radius (px) for elements with no CSS border-radius |
+| `templateProps`        | `Record<string, unknown>` | -                          | Props to inject into first child for skeleton rendering   |
 
 ### Example with All Props
 
@@ -115,9 +114,9 @@ The `templateProps` object is spread onto the first child component when loading
   backgroundColor="rgba(255, 255, 255, 0.1)"
   duration={2}
   fallbackBorderRadius={8}
-  templateProps={{ 
+  templateProps={{
     user: userTemplate,
-    settings: settingsTemplate 
+    settings: settingsTemplate,
   }}
 >
   <MyComponent user={user} settings={settings} />
@@ -150,17 +149,17 @@ Each section can have its own independent loading state:
 function Dashboard() {
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingStats, setLoadingStats] = useState(true);
-  
+
   return (
     <>
       {/* User profile section */}
       <Shimmer loading={loadingUser} templateProps={{ user: userTemplate }}>
         <UserProfile user={user} />
       </Shimmer>
-      
+
       {/* Stats section - with custom colors */}
-      <Shimmer 
-        loading={loadingStats} 
+      <Shimmer
+        loading={loadingStats}
         templateProps={{ stats: statsTemplate }}
         shimmerColor="rgba(20, 184, 166, 0.2)"
       >
@@ -174,10 +173,7 @@ function Dashboard() {
 ### Transactions List
 
 ```tsx
-<Shimmer 
-  loading={loadingTransactions}
-  templateProps={{ transactions: transactionsTemplate }}
->
+<Shimmer loading={loadingTransactions} templateProps={{ transactions: transactionsTemplate }}>
   <TransactionsList transactions={transactions} />
 </Shimmer>
 ```
@@ -220,6 +216,7 @@ function App() {
 ### Why `loading={true}` is Always Set
 
 When using Shimmer as a Suspense fallback:
+
 1. **Suspend**: React renders the fallback → Shimmer shows with `loading={true}`
 2. **Resolve**: React **replaces** the entire fallback with the real component
 3. The Shimmer is **unmounted**, not updated — so you never need to toggle `loading`
@@ -227,6 +224,7 @@ When using Shimmer as a Suspense fallback:
 ### Performance Tips for Suspense
 
 **Memoize the fallback** to prevent re-renders:
+
 ```tsx
 const ShimmerFallback = React.memo(() => (
   <Shimmer loading={true} templateProps={{ user: userTemplate }}>
@@ -237,7 +235,7 @@ const ShimmerFallback = React.memo(() => (
 // Usage
 <Suspense fallback={<ShimmerFallback />}>
   <UserProfile userId="123" />
-</Suspense>
+</Suspense>;
 ```
 
 **Keep templates lightweight** — the DOM is measured synchronously via `useLayoutEffect`, so avoid complex logic in your template.
@@ -252,12 +250,14 @@ import { Shimmer, ShimmerProvider } from 'shimmer-from-structure';
 function App() {
   return (
     // Set global defaults
-    <ShimmerProvider config={{
-      shimmerColor: 'rgba(56, 189, 248, 0.4)', // Blue shimmer
-      backgroundColor: 'rgba(56, 189, 248, 0.1)', // Blue background
-      duration: 2.5,
-      fallbackBorderRadius: 8
-    }}>
+    <ShimmerProvider
+      config={{
+        shimmerColor: 'rgba(56, 189, 248, 0.4)', // Blue shimmer
+        backgroundColor: 'rgba(56, 189, 248, 0.1)', // Blue background
+        duration: 2.5,
+        fallbackBorderRadius: 8,
+      }}
+    >
       <Dashboard />
     </ShimmerProvider>
   );
@@ -290,12 +290,15 @@ function MyComponent() {
 ## Best Practices
 
 ### 1. Use `templateProps` for Dynamic Data
+
 When your component receives data via props, always provide `templateProps` with mock data that matches the expected structure.
 
 ### 2. Match Template Structure to Real Data
+
 Ensure your template data has the same array length and property structure as real data for accurate shimmer layout.
 
 ### 3. Use Individual Shimmer Components
+
 Wrap each section in its own Shimmer for independent loading states:
 
 ```tsx
@@ -311,7 +314,9 @@ Wrap each section in its own Shimmer for independent loading states:
 ```
 
 ### 4. Consider Element Widths
+
 Block elements like `<h1>`, `<p>` take full container width. If you want shimmer to match text width:
+
 ```css
 .title {
   width: fit-content;
@@ -319,6 +324,7 @@ Block elements like `<h1>`, `<p>` take full container width. If you want shimmer
 ```
 
 ### 5. Provide Container Dimensions
+
 For async components (like charts), ensure containers have explicit dimensions so shimmer has something to measure.
 
 ## ⚡ Performance Considerations

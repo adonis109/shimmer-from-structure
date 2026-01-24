@@ -80,10 +80,34 @@ const statsTemplate: StatCard[] = [
 ];
 
 const transactionsTemplate: Transaction[] = [
-  { id: '1', description: 'Loading transaction...', amount: '$0.00', date: 'Jan 00', status: 'pending' },
-  { id: '2', description: 'Loading transaction...', amount: '$0.00', date: 'Jan 00', status: 'pending' },
-  { id: '3', description: 'Loading transaction...', amount: '$0.00', date: 'Jan 00', status: 'pending' },
-  { id: '4', description: 'Loading transaction...', amount: '$0.00', date: 'Jan 00', status: 'pending' },
+  {
+    id: '1',
+    description: 'Loading transaction...',
+    amount: '$0.00',
+    date: 'Jan 00',
+    status: 'pending',
+  },
+  {
+    id: '2',
+    description: 'Loading transaction...',
+    amount: '$0.00',
+    date: 'Jan 00',
+    status: 'pending',
+  },
+  {
+    id: '3',
+    description: 'Loading transaction...',
+    amount: '$0.00',
+    date: 'Jan 00',
+    status: 'pending',
+  },
+  {
+    id: '4',
+    description: 'Loading transaction...',
+    amount: '$0.00',
+    date: 'Jan 00',
+    status: 'pending',
+  },
 ];
 
 const activityTemplate: ActivityItem[] = [
@@ -96,10 +120,15 @@ const teamTemplate: TeamMember[] = [
   { id: '1', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
   { id: '2', name: 'Loading...', role: 'Lead Developer', avatar: 'https://via.placeholder.com/40' },
   { id: '3', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
-  { id: '4', name: 'Loading...', role: 'Backend Developer', avatar: 'https://via.placeholder.com/40' },
+  {
+    id: '4',
+    name: 'Loading...',
+    role: 'Backend Developer',
+    avatar: 'https://via.placeholder.com/40',
+  },
 ];
 
-const chartTemplate: ChartDataPoint[] = [
+const _chartTemplate: ChartDataPoint[] = [
   { name: 'Mon', revenue: 3000, orders: 30 },
   { name: 'Tue', revenue: 4500, orders: 45 },
   { name: 'Wed', revenue: 3800, orders: 38 },
@@ -129,22 +158,57 @@ const realStats: StatCard[] = [
 ];
 
 const realTransactions: Transaction[] = [
-  { id: '1', description: 'Premium Subscription', amount: '$99.00', date: 'Jan 20', status: 'completed' },
-  { id: '2', description: 'API Credits Purchase', amount: '$250.00', date: 'Jan 19', status: 'completed' },
-  { id: '3', description: 'Team License Upgrade', amount: '$499.00', date: 'Jan 18', status: 'pending' },
+  {
+    id: '1',
+    description: 'Premium Subscription',
+    amount: '$99.00',
+    date: 'Jan 20',
+    status: 'completed',
+  },
+  {
+    id: '2',
+    description: 'API Credits Purchase',
+    amount: '$250.00',
+    date: 'Jan 19',
+    status: 'completed',
+  },
+  {
+    id: '3',
+    description: 'Team License Upgrade',
+    amount: '$499.00',
+    date: 'Jan 18',
+    status: 'pending',
+  },
   { id: '4', description: 'Support Add-on', amount: '$49.00', date: 'Jan 17', status: 'completed' },
 ];
 
 const realActivity: ActivityItem[] = [
-  { id: '1', user: 'Mike Chen', action: 'deployed', target: 'v2.4.1 to production', time: '5m ago' },
-  { id: '2', user: 'Emily Davis', action: 'approved', target: 'design review for Dashboard', time: '23m ago' },
+  {
+    id: '1',
+    user: 'Mike Chen',
+    action: 'deployed',
+    target: 'v2.4.1 to production',
+    time: '5m ago',
+  },
+  {
+    id: '2',
+    user: 'Emily Davis',
+    action: 'approved',
+    target: 'design review for Dashboard',
+    time: '23m ago',
+  },
   { id: '3', user: 'Alex Rivera', action: 'commented on', target: 'Issue #847', time: '1h ago' },
 ];
 
 const realTeam: TeamMember[] = [
   { id: '1', name: 'Mike Chen', role: 'Lead Developer', avatar: 'https://i.pravatar.cc/40?img=11' },
   { id: '2', name: 'Emily Davis', role: 'UX Designer', avatar: 'https://i.pravatar.cc/40?img=9' },
-  { id: '3', name: 'Alex Rivera', role: 'Backend Engineer', avatar: 'https://i.pravatar.cc/40?img=12' },
+  {
+    id: '3',
+    name: 'Alex Rivera',
+    role: 'Backend Engineer',
+    avatar: 'https://i.pravatar.cc/40?img=12',
+  },
   { id: '4', name: 'Jordan Lee', role: 'DevOps', avatar: 'https://i.pravatar.cc/40?img=15' },
 ];
 
@@ -215,7 +279,7 @@ const TransactionsList = ({ transactions }: { transactions: Transaction[] }) => 
 );
 
 // Revenue Chart
-const RevenueChart = ({ data }: { data: ChartDataPoint[] }) => (
+const _RevenueChart = ({ data }: { data: ChartDataPoint[] }) => (
   <div className="revenue-chart">
     <h3 className="section-title">Weekly Revenue</h3>
     <div className="chart-container">
@@ -315,9 +379,27 @@ interface Notification {
 
 // Template for shimmer skeleton
 const notificationsTemplate: Notification[] = [
-  { id: '1', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
-  { id: '2', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
-  { id: '3', title: 'Loading...', message: 'Notification message loading...', time: '0m', type: 'info' },
+  {
+    id: '1',
+    title: 'Loading...',
+    message: 'Notification message loading...',
+    time: '0m',
+    type: 'info',
+  },
+  {
+    id: '2',
+    title: 'Loading...',
+    message: 'Notification message loading...',
+    time: '0m',
+    type: 'info',
+  },
+  {
+    id: '3',
+    title: 'Loading...',
+    message: 'Notification message loading...',
+    time: '0m',
+    type: 'info',
+  },
 ];
 
 // The actual Notifications component
@@ -340,13 +422,14 @@ const NotificationsPanel = ({ notifications }: { notifications: Notification[] }
 
 // Simulate a lazy-loaded component (as if it was code-split)
 // In real usage, this would be: const LazyNotifications = lazy(() => import('./Notifications'));
-const LazyNotificationsPanel = lazy(() =>
-  new Promise<{ default: typeof NotificationsPanel }>((resolve) => {
-    // Simulate network delay for code-splitting
-    setTimeout(() => {
-      resolve({ default: NotificationsPanel });
-    }, 3000);
-  })
+const LazyNotificationsPanel = lazy(
+  () =>
+    new Promise<{ default: typeof NotificationsPanel }>((resolve) => {
+      // Simulate network delay for code-splitting
+      setTimeout(() => {
+        resolve({ default: NotificationsPanel });
+      }, 3000);
+    })
 );
 
 // Memoized Shimmer fallback for better performance
@@ -358,9 +441,27 @@ const NotificationsShimmerFallback = React.memo(() => (
 
 // Real notifications data (loaded after component mounts)
 const realNotifications: Notification[] = [
-  { id: '1', title: 'New Comment', message: 'Sarah commented on your pull request #42', time: '2m', type: 'info' },
-  { id: '2', title: 'Build Passed', message: 'CI pipeline completed successfully', time: '15m', type: 'success' },
-  { id: '3', title: 'Security Alert', message: 'New login detected from Safari on macOS', time: '1h', type: 'warning' },
+  {
+    id: '1',
+    title: 'New Comment',
+    message: 'Sarah commented on your pull request #42',
+    time: '2m',
+    type: 'info',
+  },
+  {
+    id: '2',
+    title: 'Build Passed',
+    message: 'CI pipeline completed successfully',
+    time: '15m',
+    type: 'success',
+  },
+  {
+    id: '3',
+    title: 'Security Alert',
+    message: 'New login detected from Safari on macOS',
+    time: '1h',
+    type: 'warning',
+  },
 ];
 
 // =============================================================================
@@ -381,8 +482,8 @@ function App() {
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
   const [activity, setActivity] = useState<ActivityItem[] | null>(null);
   const [team, setTeam] = useState<TeamMember[] | null>(null);
-  const [chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
-  const [loadingChart, setLoadingChart] = useState(true);
+  const [_chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
+  const [_loadingChart, setLoadingChart] = useState(true);
 
   // Context Example State
   const [loadingContextExample, setLoadingContextExample] = useState(true);
@@ -509,10 +610,7 @@ function App() {
 
       {/* Stats Section */}
       <section className="dashboard-section">
-        <Shimmer
-          loading={loadingStats}
-          templateProps={{ stats: statsTemplate }}
-        >
+        <Shimmer loading={loadingStats} templateProps={{ stats: statsTemplate }}>
           <StatsGrid stats={stats || statsTemplate} />
         </Shimmer>
       </section>
@@ -551,20 +649,14 @@ function App() {
         <div className="sidebar">
           {/* Activity Feed */}
           <section className="dashboard-section">
-            <Shimmer
-              loading={loadingActivity}
-              templateProps={{ activities: activityTemplate }}
-            >
+            <Shimmer loading={loadingActivity} templateProps={{ activities: activityTemplate }}>
               <ActivityFeed activities={activity || activityTemplate} />
             </Shimmer>
           </section>
 
           {/* Team Members */}
           <section className="dashboard-section">
-            <Shimmer
-              loading={loadingTeam}
-              templateProps={{ members: teamTemplate }}
-            >
+            <Shimmer loading={loadingTeam} templateProps={{ members: teamTemplate }}>
               <TeamMembers members={team || teamTemplate} />
             </Shimmer>
           </section>
@@ -575,15 +667,18 @@ function App() {
       <section className="dashboard-section context-section" style={{ marginTop: '2rem' }}>
         <h3 className="section-title">🎨 Context API Example (Custom Theme)</h3>
         <p style={{ marginBottom: '1rem', color: '#888' }}>
-          This section uses <code>ShimmerProvider</code> to apply a global blue theme to all children.
+          This section uses <code>ShimmerProvider</code> to apply a global blue theme to all
+          children.
         </p>
 
-        <ShimmerProvider config={{
-          shimmerColor: 'rgba(56, 189, 248, 0.4)',
-          backgroundColor: 'rgba(56, 189, 248, 0.1)',
-          duration: 3,
-          fallbackBorderRadius: 16
-        }}>
+        <ShimmerProvider
+          config={{
+            shimmerColor: 'rgba(56, 189, 248, 0.4)',
+            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+            duration: 3,
+            fallbackBorderRadius: 16,
+          }}
+        >
           <Shimmer
             loading={loadingContextExample}
             templateProps={{ members: teamTemplate.slice(0, 2) }}

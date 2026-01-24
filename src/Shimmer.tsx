@@ -128,6 +128,7 @@ export const Shimmer: React.FC<ShimmerProps> = ({
       extractedElements.push(...extractElementInfo(child, containerRect));
     });
 
+    // eslint-disable-next-line
     setElements(extractedElements);
   }, [loading, childrenToRender]);
 
@@ -195,9 +196,10 @@ export const Shimmer: React.FC<ShimmerProps> = ({
               width: `${element.width}px`,
               height: `${element.height}px`,
               backgroundColor: resolvedBackgroundColor,
-              borderRadius: element.borderRadius === '0px'
-                ? `${resolvedFallbackBorderRadius}px`
-                : element.borderRadius,
+              borderRadius:
+                element.borderRadius === '0px'
+                  ? `${resolvedFallbackBorderRadius}px`
+                  : element.borderRadius,
               overflow: 'hidden',
             }}
           >
@@ -215,6 +217,6 @@ export const Shimmer: React.FC<ShimmerProps> = ({
           </div>
         ))}
       </div>
-    </div >
+    </div>
   );
 };

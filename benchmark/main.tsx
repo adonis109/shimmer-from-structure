@@ -5,7 +5,7 @@ import './main.css';
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
-    <React.StrictMode>
-        <Dashboard />
-    </React.StrictMode>
+  <React.StrictMode>
+    <Dashboard />
+  </React.StrictMode>
 );
