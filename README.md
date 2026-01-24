@@ -242,6 +242,51 @@ const ShimmerFallback = React.memo(() => (
 
 **Keep templates lightweight** — the DOM is measured synchronously via `useLayoutEffect`, so avoid complex logic in your template.
 
+## Global Configuration (Context API)
+
+You can set default configuration for your entire app (or specific sections) using `ShimmerProvider`. This is perfect for maintaining consistent themes without repeating props.
+
+```tsx
+import { Shimmer, ShimmerProvider } from 'shimmer-from-structure';
+
+function App() {
+  return (
+    // Set global defaults
+    <ShimmerProvider config={{
+      shimmerColor: 'rgba(56, 189, 248, 0.4)', // Blue shimmer
+      backgroundColor: 'rgba(56, 189, 248, 0.1)', // Blue background
+      duration: 2.5,
+      fallbackBorderRadius: 8
+    }}>
+      <Dashboard />
+    </ShimmerProvider>
+  );
+}
+```
+
+Components inside the provider automatically inherit values. You can still override them locally:
+
+```tsx
+// Inherits blue theme from provider
+<Shimmer loading={true}><UserCard /></Shimmer>
+
+// Overrides provider settings
+<Shimmer loading={true} duration={0.5}><FastCard /></Shimmer>
+```
+
+### Accessing Config in Hooks
+
+If you need to access the current configuration in your own components:
+
+```tsx
+import { useShimmerConfig } from 'shimmer-from-structure';
+
+function MyComponent() {
+  const config = useShimmerConfig();
+  return <div style={{ background: config.backgroundColor }}>...</div>;
+}
+```
+
 ## Best Practices
 
 ### 1. Use `templateProps` for Dynamic Data

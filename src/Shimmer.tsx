@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState, useRef } from 'react';
 import { ShimmerProps, ElementInfo } from './types';
+import { useShimmerConfig } from './ShimmerContext';
 
 /**
  * Check if an element is a "leaf" content element that should be rendered as shimmer
@@ -66,12 +67,21 @@ function extractElementInfo(element: Element, parentRect: DOMRect): ElementInfo[
 export const Shimmer: React.FC<ShimmerProps> = ({
   children,
   loading = true,
-  shimmerColor = 'rgba(255, 255, 255, 0.15)',
-  backgroundColor = 'rgba(255, 255, 255, 0.08)',
-  duration = 1.5,
-  fallbackBorderRadius = 4,
+  shimmerColor,
+  backgroundColor,
+  duration,
+  fallbackBorderRadius,
   templateProps,
 }) => {
+  // Get context values (contains defaults if no provider)
+  const contextConfig = useShimmerConfig();
+
+  // Merge: props > context > defaults
+  const resolvedShimmerColor = shimmerColor ?? contextConfig.shimmerColor;
+  const resolvedBackgroundColor = backgroundColor ?? contextConfig.backgroundColor;
+  const resolvedDuration = duration ?? contextConfig.duration;
+  const resolvedFallbackBorderRadius = fallbackBorderRadius ?? contextConfig.fallbackBorderRadius;
+
   const [elements, setElements] = useState<ElementInfo[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
@@ -184,9 +194,9 @@ export const Shimmer: React.FC<ShimmerProps> = ({
               top: `${element.y}px`,
               width: `${element.width}px`,
               height: `${element.height}px`,
-              backgroundColor,
+              backgroundColor: resolvedBackgroundColor,
               borderRadius: element.borderRadius === '0px'
-                ? `${fallbackBorderRadius}px`
+                ? `${resolvedFallbackBorderRadius}px`
                 : element.borderRadius,
               overflow: 'hidden',
             }}
@@ -198,13 +208,13 @@ export const Shimmer: React.FC<ShimmerProps> = ({
                 left: 0,
                 width: '100%',
                 height: '100%',
-                background: `linear-gradient(90deg, transparent, ${shimmerColor}, transparent)`,
-                animation: `shimmer ${duration}s infinite`,
+                background: `linear-gradient(90deg, transparent, ${resolvedShimmerColor}, transparent)`,
+                animation: `shimmer ${resolvedDuration}s infinite`,
               }}
             />
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
