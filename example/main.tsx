@@ -459,32 +459,18 @@ const OrdersTable = ({ orders }: { orders: Order[] }) => (
     >
       <thead>
         <tr style={{ borderBottom: '1px solid #eee', textAlign: 'left' }}>
-          <th style={{ padding: '12px 16px', width: '25%' }}>
-            <span>Customer</span>
-          </th>
-          <th style={{ padding: '12px 16px', width: '40%' }}>
-            <span>Product</span>
-          </th>
-          <th style={{ padding: '12px 16px', width: '20%' }}>
-            <span>Amount</span>
-          </th>
-          <th style={{ padding: '12px 16px', width: '15%' }}>
-            <span>Status</span>
-          </th>
+          <th style={{ padding: '12px 16px', width: '25%' }}>Customer</th>
+          <th style={{ padding: '12px 16px', width: '40%' }}>Product</th>
+          <th style={{ padding: '12px 16px', width: '20%' }}>Amount</th>
+          <th style={{ padding: '12px 16px', width: '15%' }}>Status</th>
         </tr>
       </thead>
       <tbody>
         {orders.map((order) => (
           <tr key={order.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
-            <td style={{ padding: '12px 16px' }}>
-              <span style={{ fontWeight: 500 }}>{order.customer}</span>
-            </td>
-            <td style={{ padding: '12px 16px', color: '#666' }}>
-              <span>{order.product}</span>
-            </td>
-            <td style={{ padding: '12px 16px', fontWeight: 600 }}>
-              <span>{order.amount}</span>
-            </td>
+            <td style={{ padding: '12px 16px', fontWeight: 500 }}>{order.customer}</td>
+            <td style={{ padding: '12px 16px', color: '#666' }}>{order.product}</td>
+            <td style={{ padding: '12px 16px', fontWeight: 600 }}>{order.amount}</td>
             <td style={{ padding: '12px 16px' }}>
               <span
                 style={{
