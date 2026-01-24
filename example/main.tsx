@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Shimmer, ShimmerProvider } from '../src';
@@ -174,7 +175,7 @@ const ordersTemplate: Order[] = [
   },
 ];
 
-const _chartTemplate: ChartDataPoint[] = [
+const chartTemplate: ChartDataPoint[] = [
   { name: 'Mon', revenue: 3000, orders: 30 },
   { name: 'Tue', revenue: 4500, orders: 45 },
   { name: 'Wed', revenue: 3800, orders: 38 },
@@ -363,7 +364,7 @@ const TransactionsList = ({ transactions }: { transactions: Transaction[] }) => 
 );
 
 // Revenue Chart
-const _RevenueChart = ({ data }: { data: ChartDataPoint[] }) => (
+const RevenueChart = ({ data }: { data: ChartDataPoint[] }) => (
   <div className="revenue-chart">
     <h3 className="section-title">Weekly Revenue</h3>
     <div className="chart-container">
@@ -619,8 +620,8 @@ function App() {
   const [orders, setOrders] = useState<Order[] | null>(null);
   const [activity, setActivity] = useState<ActivityItem[] | null>(null);
   const [team, setTeam] = useState<TeamMember[] | null>(null);
-  const [_chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
-  const [_loadingChart, setLoadingChart] = useState(true);
+  const [chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
+  const [loadingChart, setLoadingChart] = useState(true);
 
   // Context Example State
   const [loadingContextExample, setLoadingContextExample] = useState(true);
@@ -781,14 +782,11 @@ function App() {
       </section>
 
       {/* Revenue Chart Section */}
-      {/* <section className="dashboard-section">
-        <Shimmer
-          loading={loadingChart}
-          templateProps={{ data: chartTemplate }}
-        >
+      <section className="dashboard-section">
+        <Shimmer loading={loadingChart} templateProps={{ data: chartTemplate }}>
           <RevenueChart data={chartData || chartTemplate} />
         </Shimmer>
-      </section> */}
+      </section>
 
       {/* Main Content Grid */}
       <div className="content-grid">

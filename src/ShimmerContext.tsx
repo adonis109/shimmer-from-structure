@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
 import { ShimmerConfig, ShimmerContextValue } from './types';
 import { shimmerDefaults } from './constants';
@@ -45,5 +46,4 @@ export const useShimmerConfig = (): ShimmerContextValue => {
 };
 
 // Re-export defaults for testing and reference
-// eslint-disable-next-line react-refresh/only-export-components
 export { shimmerDefaults };
