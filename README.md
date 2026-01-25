@@ -110,6 +110,8 @@ const isLoading = ref(true);
 
 For components that receive dynamic data via props, use `templateProps` to provide mock data for skeleton generation:
 
+**React**
+
 ```tsx
 import { Shimmer } from 'shimmer-from-structure';
 
@@ -141,6 +143,29 @@ function App() {
 }
 ```
 
+**Vue**
+
+```vue
+<script setup>
+import { ref } from 'vue';
+import { Shimmer } from '@shimmer-from-structure/vue';
+import UserCard from './UserCard.vue';
+
+const loading = ref(true);
+const userTemplate = {
+  name: 'Loading...',
+  role: 'Loading role...',
+  avatar: 'placeholder.jpg',
+};
+</script>
+
+<template>
+  <Shimmer :loading="loading" :templateProps="{ user: userTemplate }">
+    <UserCard :user="user || userTemplate" />
+  </Shimmer>
+</template>
+```
+
 The `templateProps` object is spread onto the first child component when loading, allowing it to render with mock data for measurement.
 
 ## 🎨 API Reference
@@ -159,6 +184,8 @@ The `templateProps` object is spread onto the first child component when loading
 
 ### Example with All Props
 
+**React**
+
 ```tsx
 <Shimmer
   loading={isLoading}
@@ -172,6 +199,24 @@ The `templateProps` object is spread onto the first child component when loading
   }}
 >
   <MyComponent user={user} settings={settings} />
+</Shimmer>
+```
+
+**Vue**
+
+```vue
+<Shimmer
+  :loading="isLoading"
+  shimmerColor="rgba(255, 255, 255, 0.2)"
+  backgroundColor="rgba(255, 255, 255, 0.1)"
+  :duration="2"
+  :fallbackBorderRadius="8"
+  :templateProps="{
+    user: userTemplate,
+    settings: settingsTemplate,
+  }"
+>
+  <MyComponent :user="user" :settings="settings" />
 </Shimmer>
 ```
 
@@ -196,6 +241,8 @@ The `templateProps` object is spread onto the first child component when loading
 ### Dashboard with Multiple Sections
 
 Each section can have its own independent loading state:
+
+**React**
 
 ```tsx
 function Dashboard() {
@@ -222,11 +269,41 @@ function Dashboard() {
 }
 ```
 
+**Vue**
+
+```vue
+<template>
+  <!-- User profile section -->
+  <Shimmer :loading="loadingUser" :templateProps="{ user: userTemplate }">
+    <UserProfile :user="user" />
+  </Shimmer>
+
+  <!-- Stats section - with custom colors -->
+  <Shimmer
+    :loading="loadingStats"
+    :templateProps="{ stats: statsTemplate }"
+    shimmerColor="rgba(20, 184, 166, 0.2)"
+  >
+    <StatsGrid :stats="stats" />
+  </Shimmer>
+</template>
+```
+
 ### Transactions List
+
+**React**
 
 ```tsx
 <Shimmer loading={loadingTransactions} templateProps={{ transactions: transactionsTemplate }}>
   <TransactionsList transactions={transactions} />
+</Shimmer>
+```
+
+**Vue**
+
+```vue
+<Shimmer :loading="loadingTransactions" :templateProps="{ transactions: transactionsTemplate }">
+  <TransactionsList :transactions="transactions" />
 </Shimmer>
 ```
 
@@ -292,11 +369,11 @@ const ShimmerFallback = React.memo(() => (
 
 **Keep templates lightweight** — the DOM is measured synchronously via `useLayoutEffect`, so avoid complex logic in your template.
 
-## Global Configuration (Context API)
+## Global Configuration
 
 You can set default configuration for your entire app (or specific sections) using the context/provider pattern. This is perfect for maintaining consistent themes without repeating props.
 
-### React
+### React (Context API)
 
 ```tsx
 import { Shimmer, ShimmerProvider } from '@shimmer-from-structure/react';
@@ -318,16 +395,18 @@ function App() {
 }
 ```
 
-### Vue
+### Vue (Provide/Inject)
 
 ```vue
 <!-- App.vue -->
 <script setup>
-import { Shimmer, provideShimmerConfig } from '@shimmer-from-structure/vue';
+import { provideShimmerConfig } from '@shimmer-from-structure/vue';
 
 provideShimmerConfig({
-  shimmerColor: 'rgba(255, 0, 0, 0.1)',
-  duration: 2,
+  shimmerColor: 'rgba(56, 189, 248, 0.4)',
+  backgroundColor: 'rgba(56, 189, 248, 0.1)',
+  duration: 2.5,
+  fallbackBorderRadius: 8,
 });
 </script>
 
@@ -340,6 +419,8 @@ provideShimmerConfig({
 
 Components inside the provider automatically inherit values. You can still override them locally:
 
+**React**
+
 ```tsx
 // Inherits blue theme from provider
 <Shimmer loading={true}><UserCard /></Shimmer>
@@ -348,9 +429,21 @@ Components inside the provider automatically inherit values. You can still overr
 <Shimmer loading={true} duration={0.5}><FastCard /></Shimmer>
 ```
 
-### Accessing Config in Hooks
+**Vue**
+
+```vue
+<!-- Inherits blue theme from provider -->
+<Shimmer :loading="true"><UserCard /></Shimmer>
+
+<!-- Overrides provider settings -->
+<Shimmer :loading="true" :duration="0.5"><FastCard /></Shimmer>
+```
+
+### Accessing Config in Hooks/Composables
 
 If you need to access the current configuration in your own components:
+
+**React**
 
 ```tsx
 import { useShimmerConfig } from 'shimmer-from-structure';
@@ -359,6 +452,15 @@ function MyComponent() {
   const config = useShimmerConfig();
   return <div style={{ background: config.backgroundColor }}>...</div>;
 }
+```
+
+**Vue**
+
+```javascript
+import { useShimmerConfig } from '@shimmer-from-structure/vue';
+
+const config = useShimmerConfig();
+console.log(config.value.backgroundColor);
 ```
 
 ## Best Practices
