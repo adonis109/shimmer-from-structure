@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Framework-agnostic DOM measurement utilities for shimmer effects",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -27,6 +27,11 @@
     "dom",
     "measurement"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git",
+    "directory": "packages/core"
+  },
   "author": "Olebogeng Mbedzi",
   "license": "MIT"
 }

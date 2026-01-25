@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/vue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vue 3 adapter for shimmer-from-structure",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -38,6 +38,11 @@
     "skeleton",
     "loading"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git",
+    "directory": "packages/vue"
+  },
   "author": "Olebogeng Mbedzi",
   "license": "MIT"
 }
