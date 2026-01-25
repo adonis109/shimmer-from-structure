@@ -19,7 +19,7 @@
     "build": "vue-tsc && vite build",
     "test": "vitest",
     "format": "prettier --write .",
-    "prepublishOnly": "cp ../../VUE_README.md ./README.md"
+    "prepublishOnly": "cp ../../README.md ."
   },
   "peerDependencies": {
     "vue": "^3.3.0"
