@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Shimmer, ShimmerProvider } from '../src';
+import { Shimmer, ShimmerProvider } from 'shimmer-from-structure';
 import {
   AreaChart,
   Area,

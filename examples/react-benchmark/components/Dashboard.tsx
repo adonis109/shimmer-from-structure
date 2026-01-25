@@ -14,7 +14,7 @@ import {
   ScatterChart,
   Scatter,
 } from 'recharts';
-import { Shimmer } from '../../src/Shimmer';
+import { Shimmer } from 'shimmer-from-structure';
 import { BenchmarkResult, FixtureInfo } from '../types';
 import { runBenchmark, formatTime, getPerformanceGrade } from '../utils/performance';
 import { SimpleCard, NestedList, ComplexGrid, StressTest } from './fixtures';
