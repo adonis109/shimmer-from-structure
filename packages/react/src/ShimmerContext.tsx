@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
-import { ShimmerConfig, ShimmerContextValue } from './types';
-import { shimmerDefaults } from './constants';
+import type { ShimmerConfig, ShimmerContextValue } from '@shimmer-from-structure/core';
+import { shimmerDefaults } from '@shimmer-from-structure/core';
 
 const ShimmerContext = createContext<ShimmerContextValue>(shimmerDefaults);
 
