@@ -17,7 +17,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'ShimmerReact',
       formats: ['es', 'umd'],
-      fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
+      fileName: (format: string) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
     },
     rollupOptions: {
       external: ['react', 'react-dom', '@shimmer-from-structure/core'],
@@ -30,4 +30,5 @@ export default defineConfig({
       },
     },
   },
-});
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any);

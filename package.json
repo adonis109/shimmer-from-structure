@@ -8,7 +8,7 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build:core && npm run build:react && npm run build:vue && npm run build:main",
     "build:core": "npm run build -w @shimmer-from-structure/core",
     "build:react": "npm run build -w @shimmer-from-structure/react",
     "build:vue": "npm run build -w @shimmer-from-structure/vue",

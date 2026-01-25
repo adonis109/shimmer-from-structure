@@ -151,6 +151,7 @@ describe('Shimmer.vue', () => {
     await nextTick();
 
     // Props should override context
-    expect(wrapper.vm.resolvedShimmerColor).toBe('rgba(100, 200, 300, 0.5)');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((wrapper.vm as any).resolvedShimmerColor).toBe('rgba(100, 200, 300, 0.5)');
   });
 });

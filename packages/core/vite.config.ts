@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
@@ -14,11 +15,12 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'ShimmerCore',
       formats: ['es', 'umd'],
-      fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
+      fileName: (format: string) => `index.${format === 'es' ? 'esm.js' : 'js'}`,
     },
   },
   test: {
     globals: true,
     environment: 'jsdom',
   },
-});
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any);

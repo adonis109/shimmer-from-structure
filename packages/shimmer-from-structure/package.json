@@ -11,6 +11,10 @@
     },
     "./vue": "@shimmer-from-structure/vue"
   },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
   "dependencies": {
     "@shimmer-from-structure/react": "*",
     "@shimmer-from-structure/vue": "*"
