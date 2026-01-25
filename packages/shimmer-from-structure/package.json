@@ -1,6 +1,6 @@
 {
   "name": "shimmer-from-structure",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Universal UI skeleton generator for React and Vue. Auto-adapts to your component structure with zero maintenance and pixel-perfect accuracy.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepublishOnly": "cp ../../README.md ."
   },
   "dependencies": {
     "@shimmer-from-structure/react": "*",
