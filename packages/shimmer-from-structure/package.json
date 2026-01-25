@@ -1,6 +1,6 @@
 {
   "name": "shimmer-from-structure",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Universal UI skeleton generator for React and Vue. Auto-adapts to your component structure with zero maintenance and pixel-perfect accuracy.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -39,6 +39,11 @@
     "skeleton",
     "loading"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git",
+    "directory": "packages/shimmer-from-structure"
+  },
   "author": "Olebogeng Mbedzi",
   "license": "MIT"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React adapter for shimmer-from-structure",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -34,6 +34,11 @@
     "skeleton",
     "loading"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git",
+    "directory": "packages/react"
+  },
   "author": "Olebogeng Mbedzi",
   "license": "MIT"
 }
