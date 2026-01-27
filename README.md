@@ -1,9 +1,10 @@
 # ✨ Shimmer From Structure
 
-A **React & Vue** shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
+A **React, Vue & Svelte** shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
 
 ![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Vue](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
+![Svelte](https://img.shields.io/badge/Svelte-ff3e00?style=for-the-badge&logo=svelte&logoColor=white)
 
 ![Shimmer From Structure Demo](https://github.com/darula-hpp/shimmer-from-structure/raw/main/example/preview.gif)
 
@@ -17,7 +18,7 @@ Traditional shimmer libraries require you to:
 
 **Shimmer From Structure** eliminates all of that:
 
-- ✅ **Works with React & Vue** - Simple, framework-specific drivers
+- ✅ **Works with React, Vue & Svelte** - Simple, framework-specific drivers
 - ✅ Automatically measures your component's structure at runtime
 - ✅ Generates shimmer effects that match actual dimensions
 - ✅ Zero maintenance - works with any layout changes
@@ -56,6 +57,15 @@ Vue support requires importing from the specific adapter:
 ```javascript
 // Vue 3 projects
 import { Shimmer } from '@shimmer-from-structure/vue';
+```
+
+### Svelte
+
+Svelte support is provided via its own adapter:
+
+```javascript
+// Svelte projects
+import { Shimmer } from '@shimmer-from-structure/svelte';
 ```
 
 ---
@@ -105,6 +115,25 @@ const isLoading = ref(true);
     </div>
   </Shimmer>
 </template>
+```
+
+## Svelte
+
+### Static Content
+
+```svelte
+<script>
+import { Shimmer } from '@shimmer-from-structure/svelte';
+let isLoading = true;
+</script>
+
+<Shimmer loading={isLoading}>
+  <div class="card">
+    <img src="avatar.jpg" class="avatar" />
+    <h2>John Doe</h2>
+    <p>Software Engineer</p>
+  </div>
+</Shimmer>
 ```
 
 ---
@@ -169,6 +198,27 @@ const userTemplate = {
 </template>
 ```
 
+**Svelte**
+
+```svelte
+<script>
+import { Shimmer } from '@shimmer-from-structure/svelte';
+import UserCard from './UserCard.svelte';
+
+export let user;
+let loading = true;
+const userTemplate = {
+  name: 'Loading...',
+  role: 'Loading role...',
+  avatar: 'placeholder.jpg',
+};
+</script>
+
+<Shimmer loading={loading} templateProps={{ user: userTemplate }}>
+  <UserCard user={user || userTemplate} />
+</Shimmer>
+```
+
 The `templateProps` object is spread onto the first child component when loading, allowing it to render with mock data for measurement.
 
 ## 🎨 API Reference
@@ -220,6 +270,24 @@ The `templateProps` object is spread onto the first child component when loading
   }"
 >
   <MyComponent :user="user" :settings="settings" />
+</Shimmer>
+```
+
+**Svelte**
+
+```svelte
+<Shimmer
+  loading={isLoading}
+  shimmerColor="rgba(255, 255, 255, 0.2)"
+  backgroundColor="rgba(255, 255, 255, 0.1)"
+  duration={2}
+  fallbackBorderRadius={8}
+  templateProps={{
+    user: userTemplate,
+    settings: settingsTemplate,
+  }}
+>
+  <MyComponent {user} {settings} />
 </Shimmer>
 ```
 
@@ -292,6 +360,22 @@ function Dashboard() {
 </template>
 ```
 
+**Svelte**
+
+```svelte
+<Shimmer loading={loadingUser} templateProps={{ user: userTemplate }}>
+  <UserProfile {user} />
+</Shimmer>
+
+<Shimmer
+  loading={loadingStats}
+  templateProps={{ stats: statsTemplate }}
+  shimmerColor="rgba(20, 184, 166, 0.2)"
+>
+  <StatsGrid {stats} />
+</Shimmer>
+```
+
 ### Transactions List
 
 **React**
@@ -310,9 +394,35 @@ function Dashboard() {
 </Shimmer>
 ```
 
+**Svelte**
+
+```svelte
+<Shimmer loading={loadingTransactions} templateProps={{ transactions: transactionsTemplate }}>
+  <TransactionsList {transactions} />
+</Shimmer>
+```
+
 ### Team Members Grid
 
+**React**
+
 ```tsx
+<Shimmer loading={loadingTeam} templateProps={{ members: teamTemplate }}>
+  <TeamMembers members={team} />
+</Shimmer>
+```
+
+**Vue**
+
+```vue
+<Shimmer :loading="loadingTeam" :templateProps="{ members: teamTemplate }">
+  <TeamMembers :members="team" />
+</Shimmer>
+```
+
+**Svelte**
+
+```svelte
 <Shimmer loading={loadingTeam} templateProps={{ members: teamTemplate }}>
   <TeamMembers members={team} />
 </Shimmer>
@@ -418,6 +528,24 @@ provideShimmerConfig({
 </template>
 ```
 
+### Svelte (setShimmerConfig)
+
+```svelte
+<!-- App.svelte or any parent component -->
+<script>
+import { setShimmerConfig } from '@shimmer-from-structure/svelte';
+
+setShimmerConfig({
+  shimmerColor: 'rgba(56, 189, 248, 0.4)',
+  backgroundColor: 'rgba(56, 189, 248, 0.1)',
+  duration: 2.5,
+  fallbackBorderRadius: 8,
+});
+</script>
+
+<Dashboard />
+```
+
 ---
 
 Components inside the provider automatically inherit values. You can still override them locally:
@@ -442,6 +570,16 @@ Components inside the provider automatically inherit values. You can still overr
 <Shimmer :loading="true" :duration="0.5"><FastCard /></Shimmer>
 ```
 
+**Svelte**
+
+```svelte
+<!-- Inherits blue theme from provider -->
+<Shimmer loading={true}><UserCard /></Shimmer>
+
+<!-- Overrides provider settings -->
+<Shimmer loading={true} duration={0.5}><FastCard /></Shimmer>
+```
+
 ### Accessing Config in Hooks/Composables
 
 If you need to access the current configuration in your own components:
@@ -464,6 +602,15 @@ import { useShimmerConfig } from '@shimmer-from-structure/vue';
 
 const config = useShimmerConfig();
 console.log(config.value.backgroundColor);
+```
+
+**Svelte**
+
+```javascript
+import { getShimmerConfig } from '@shimmer-from-structure/svelte';
+
+const config = getShimmerConfig();
+console.log(config.backgroundColor);
 ```
 
 ## Best Practices
@@ -530,6 +677,7 @@ npm run build
 npm run build:core
 npm run build:react
 npm run build:vue
+npm run build:svelte
 npm run build:main
 
 # Run tests
@@ -554,12 +702,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This library is organized as a monorepo with four packages:
 
-| Package                         | Description                                 | Size     |
-| ------------------------------- | ------------------------------------------- | -------- |
-| `@shimmer-from-structure/core`  | Framework-agnostic DOM utilities            | 1.44 kB  |
-| `@shimmer-from-structure/react` | React adapter                               | 12.84 kB |
-| `@shimmer-from-structure/vue`   | Vue 3 adapter                               | 3.89 kB  |
-| `shimmer-from-structure`        | Main package (React backward compatibility) | 0.93 kB  |
+| Package                          | Description                                 | Size     |
+| -------------------------------- | ------------------------------------------- | -------- |
+| `@shimmer-from-structure/core`   | Framework-agnostic DOM utilities            | 1.44 kB  |
+| `@shimmer-from-structure/react`  | React adapter                               | 12.84 kB |
+| `@shimmer-from-structure/vue`    | Vue 3 adapter                               | 3.89 kB  |
+| `@shimmer-from-structure/svelte` | Svelte adapter                              | 4.60 kB  |
+| `shimmer-from-structure`         | Main package (React backward compatibility) | 0.93 kB  |
 
 The core package contains all DOM measurement logic, while React and Vue packages are thin wrappers that provide framework-specific APIs.
 
@@ -568,11 +717,11 @@ The core package contains all DOM measurement logic, while React and Vue package
 - [x] Dynamic data support via `templateProps`
 - [x] Auto border-radius detection
 - [x] Container background visibility
-- [x] **Vue.js adapter** ✨
+- [x] **Vue.js adapter**
+- [x] **Svelte adapter**
 - [ ] Better async component support
 - [ ] Customizable shimmer direction (vertical, diagonal)
 - [ ] React Native support
-- [ ] Svelte adapter
 
 ---
 

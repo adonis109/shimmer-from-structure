@@ -1,7 +1,8 @@
 {
-  "name": "@shimmer-from-structure/vue",
+  "name": "@shimmer-from-structure/svelte",
   "version": "1.1.0",
-  "description": "Vue 3 adapter for shimmer-from-structure",
+  "type": "module",
+  "description": "Svelte adapter for shimmer-from-structure",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -16,24 +17,31 @@
     }
   },
   "scripts": {
-    "build": "vue-tsc && vite build",
+    "build": "svelte-check && vite build",
     "test": "vitest",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
     "format": "prettier --write .",
     "prepublishOnly": "cp ../../README.md ."
   },
   "peerDependencies": {
-    "vue": "^3.3.0"
+    "svelte": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
     "@shimmer-from-structure/core": "*"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "@vue/test-utils": "^2.4.6",
-    "vue-tsc": "^2.0.0"
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/svelte": "^5.3.1",
+    "jsdom": "^27.4.0",
+    "svelte": "^4.0.0",
+    "svelte-check": "^3.0.0",
+    "tslib": "^2.0.0",
+    "typescript": "^5.0.0"
   },
   "keywords": [
-    "vue",
+    "svelte",
     "shimmer",
     "skeleton",
     "loading"
@@ -41,7 +49,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git",
-    "directory": "packages/vue"
+    "directory": "packages/svelte"
   },
   "author": "Olebogeng Mbedzi",
   "license": "MIT"
