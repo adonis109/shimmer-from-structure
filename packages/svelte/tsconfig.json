@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
+    "types": ["svelte"]
+  },
+  "include": ["src/**/*", "vite.config.ts", "vitest.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}
